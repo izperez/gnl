@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 10:52:51 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/21 12:06:23 by izperez          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:30:09 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 # define GET_NEXT_LINE_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 7
+#  define BUFFER_SIZE 1
 # endif
 
 # include <unistd.h>
@@ -34,6 +34,7 @@ char			*ft_strchr(const char *s, int c);
 unsigned int	ft_strlen(const char *str);
 char			*ft_substr(char const *s, unsigned int start, size_t len);
 char			*ft_strjoin(char const *s1, char const *s2);
-char			*ft_strdup(const char *s1);
+char			*ft_strdup(char *s1);
+size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
 
 #endif

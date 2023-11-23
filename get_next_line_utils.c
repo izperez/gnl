@@ -6,32 +6,31 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:52:44 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/21 12:06:07 by izperez          ###   ########.fr       */
+/*   Updated: 2023/11/23 12:33:32 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*ft_strdup(const char *s1)
+/* allocate memory for the str */
+char	*ft_strdup(char *s1)
 {
-	char	*alt;
-	size_t	i;
-	size_t	j;
+	unsigned int	len;
+	char			*str;
+	int				i;
 
 	i = 0;
-	j = 0;
-	while (s1[i] != '\0')
-		i++;
-	alt = malloc((1 + i) * sizeof(char) + 1);
-	if (!alt)
+	len = ft_strlen(s1);
+	str = (char *) malloc (sizeof(char) * (len + 1));
+	if (str == 0)
 		return (0);
-	while (j < i)
+	while (s1[i])
 	{
-		alt[j] = s1[j];
-		j++;
+		str[i] = s1[i];
+		i++;
 	}
-	alt[i] = '\0';
-	return (alt);
+	str[i] = '\0';
+	return (str);
 }
 
 /* join 2 str*/
@@ -73,8 +72,6 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	i = 0;
 	if (!s)
 		return (0);
-	/* if ((unsigned int)ft_strlen(s) < start)
-		return (ft_strdup("")); */
 	size = ft_strlen(s + start);
 	if (size < len)
 		len = size;
@@ -103,19 +100,13 @@ unsigned int	ft_strlen(const char *str)
 /* find a char in the string */
 char	*ft_strchr(const char *s, int c)
 {
-	int		i;
 	char	*str;
 
 	str = (char *) s;
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == (unsigned char)c)
-			return (str + i);
-		i++;
-	}
-	if ((unsigned char) c == '\0')
-		return (str + i);
+	while (*str != c && *str != 0)
+		str++;
+	if (*str == c)
+		return (str);
 	else
-		return (0);
+		return (NULL);
 }
