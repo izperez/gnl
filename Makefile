@@ -6,32 +6,16 @@
 #    By: izperez <izperez@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/10/19 10:55:46 by izperez           #+#    #+#              #
-#    Updated: 2023/11/20 12:44:35 by izperez          ###   ########.fr        #
+#    Updated: 2023/11/23 18:00:24 by izperez          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-AR		= ar rcs
-CC		= gcc
-CFLAGS	= -Wall -Werror -Wextra
-RM		= rm -f
+all:	get_next_line
 
-NAME	= get_next_line.a
+get_next_line: repo/get_next_line.c repo/get_next_line_utils.c repo/get_next_line.h main.c
+		gcc -Wall -Werror -Wextra repo/get_next_line.c repo/get_next_line_utils.c main.c -Irepo/ -o get_next_line -D BUFFER_SIZE=42
 
-SRC	= get_next_line.c get_next_line_utils.c main.c
-OBJ	= $(SRC:.c=.o)
+clean:
+	rm -f get_next_line
 
-%.o: %.c
-		$(CC) $(CFLAGS) -c $(SRC)
-
-all:	$(NAME)
-
-$(NAME): $(OBJ)
-		 $(AR) $(NAME) $(OBJ)
-
-clean:	
-	$(RM) $(OBJ)
-
-fclean:	clean
-		$(RM) $(NAME)
-
-re:		fclean all
+.PHONY: all clean

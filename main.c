@@ -1,30 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main2.c                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:53:02 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/23 10:21:21 by izperez          ###   ########.fr       */
+/*   Updated: 2023/11/23 17:57:45 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <fcntl.h>
+#include <stdio.h>
+
 #include "get_next_line.h"
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	int		fd;
 	char	*line;
+	int i;
 
-	fd = open("prueba1.txt", O_RDONLY);
-	line = "algo";
-	while (line)
+	if (argc < 2)
+		return (0);
+	fd = open(argv[1], O_RDONLY);
+	if (fd == -1)
+		return (0);
+	i = 1;
+	while ((line = get_next_line(fd)) != NULL)
 	{
-		line = get_next_line(fd);
-		printf("%s", line);
-		//free(line);
+		printf("Linea %d: %s", i, line);
+		free(line);
+		i++;
 	}
+	printf("\n");
 	close(fd);
 	return (0);
 }
