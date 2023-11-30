@@ -6,7 +6,7 @@
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/21 09:00:41 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/23 18:02:49 by izperez          ###   ########.fr       */
+/*   Updated: 2023/11/27 10:09:44 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,6 @@ static char	*gn_getline(char *line, char *buf)
 	return (gn_free(line), result);
 }
 
-/*
- *	Mover el sobrante (a partir de \n) al principio del buffer
- */
 static void	gn_saverest(char *buf)
 {
 	size_t	buf_len;
@@ -57,11 +54,6 @@ static void	gn_saverest(char *buf)
 		buf[0] = '\0';
 }
 
-/*
- *	Leer el sobrante de la llamada anterior de buffer a line
- *	Leer del fd al buffer y añadir a line hasta salto de línea o final del fichero
- *	Dejar el sobrante en buffer para la siguiente llamada
- */
 static char	*gn_readline(int fd, char *buf)
 {
 	char	*line;
@@ -88,7 +80,7 @@ static char	*gn_readline(int fd, char *buf)
 char	*get_next_line(int fd)
 {
 	static char	buf[BUFFER_SIZE + 1];
-	char		*line; 
+	char		*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);

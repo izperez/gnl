@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.h                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.h                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/19 10:52:51 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/23 17:47:18 by izperez          ###   ########.fr       */
+/*   Created: 2023/11/24 11:29:12 by izperez           #+#    #+#             */
+/*   Updated: 2023/11/27 09:56:23 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GET_NEXT_LINE_H
-# define GET_NEXT_LINE_H
+#ifndef GET_NEXT_LINE_BONUS_H
+# define GET_NEXT_LINE_BONUS_H
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 # include <stdlib.h>
@@ -22,9 +22,8 @@
 
 size_t	gn_strlen(char *str);
 char	*gn_strncpy(char *dest, const char *src, size_t n);
-char	gn_strchr(char *str, char c);
-void	gn_free(void *ptr);
+char	gn_strchr(const char *str, int c);
+void	gn_free(char *ptr);
 
 char	*get_next_line(int fd);
-
 #endif

@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 11:53:02 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/24 10:09:08 by izperez          ###   ########.fr       */
+/*   Created: 2023/10/19 10:52:51 by izperez           #+#    #+#             */
+/*   Updated: 2023/11/24 10:09:42 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fcntl.h>
-#include <stdio.h>
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-#include "get_next_line.h"
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 20
+# endif
 
-int	main(int argc, char **argv)
-{
-	int		fd;
-	char	*line;
-	int		i;
+# include <stdlib.h>
+# include <unistd.h>
 
-	if (argc < 2)
-		return (0);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (0);
-	i = 1;
-	while ((line = get_next_line(fd)) != NULL)
-	{
-		printf("Linea %d: %s", i, line);
-		free(line);
-		i++;
-	}
-	printf("\n");
-	close(fd);
-	return (0);
-}
+size_t	gn_strlen(char *str);
+char	*gn_strncpy(char *dest, const char *src, size_t n);
+char	gn_strchr(char *str, char c);
+void	gn_free(void *ptr);
+
+char	*get_next_line(int fd);
+
+#endif

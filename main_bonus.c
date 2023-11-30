@@ -1,39 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: izperez <izperez@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/20 11:53:02 by izperez           #+#    #+#             */
-/*   Updated: 2023/11/24 10:09:08 by izperez          ###   ########.fr       */
+/*   Updated: 2023/11/30 11:56:55 by izperez          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <fcntl.h>
 #include <stdio.h>
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int	main(int argc, char **argv)
 {
-	int		fd;
+	int		fd1;
+	int		fd2;
 	char	*line;
 	int		i;
 
-	if (argc < 2)
-		return (0);
-	fd = open(argv[1], O_RDONLY);
-	if (fd == -1)
-		return (0);
+	if (argc < 3)
+		return (1);
+	fd1 = open(argv[1], O_RDONLY);
+	if (fd1 == -1)
+		return (1);
+	fd2 = open(argv[2], O_RDONLY);
+	if (fd2 == -1)
+		return (close(fd1), 1);
 	i = 1;
-	while ((line = get_next_line(fd)) != NULL)
+	while (i < 10)
 	{
-		printf("Linea %d: %s", i, line);
-		free(line);
+		line = get_next_line(fd1);
+		if (line != NULL)
+		{
+			printf("Linea fichero 1 %d: %s", i, line);
+			free(line);
+		}
+		line = get_next_line(fd2);
+		if (line != NULL)
+		{
+			printf("Linea fichero 2 %d: %s", i, line);
+			free(line);
+		}
 		i++;
 	}
-	printf("\n");
-	close(fd);
+	close(fd1);
+	close(fd2);
 	return (0);
 }
